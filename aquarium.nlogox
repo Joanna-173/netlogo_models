@@ -28,7 +28,7 @@ to setup-aquarium
   ; Generally deal with patches, i.e. the "abiotic environment"
   ; Fill the aquarium
   ask patches [
-    set pcolor blue
+    set pcolor green
   ]
   
   ; set bottom row of patches sandy yellow
