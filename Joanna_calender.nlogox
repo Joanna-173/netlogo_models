@@ -18,12 +18,15 @@ end
 
 ;@todo consider later that months have different lengths 
 to advance-calender
-  set day (day + 1)
-  if day > 30 [
-    set month month + 1
-    set day 1
+  set day day + 1
+  let month-lengths [31 28 31 30 31 30 31 31 30 31 30 31]
+  if month = 2 and ((year mod 400 = 0) or ((year mod 4 = 0) and (year mod 100 != 0))) [
+    set month-lengths replace-item 1 month-lengths 29
   ]
-  
+  if day > item (month - 1) month-lengths [
+    set day 1
+    set month month + 1
+  ]
   if month > 12 [
     set year year + 1
     set month 1
@@ -34,11 +37,11 @@ end
 ]]></code>
   <widgets>
     <view x="368" wrappingAllowedX="true" y="10" frameRate="30.0" minPycor="-16" height="434" showTickCounter="true" patchSize="13.0" fontSize="10" wrappingAllowedY="true" width="434" tickCounterLabel="ticks" maxPycor="16" updateMode="0" maxPxcor="16" minPxcor="-16"></view>
-    <button x="140" y="30" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="55" display="setup">setup</button>
     <button x="130" y="105" height="40" disableUntilTicks="false" forever="true" kind="Observer" width="55" display="go">go</button>
     <monitor x="5" precision="0" y="165" height="60" fontSize="11" width="100">year</monitor>
     <monitor x="110" precision="0" y="165" height="60" fontSize="11" width="100">month</monitor>
     <monitor x="220" precision="0" y="165" height="60" fontSize="11" width="100">day</monitor>
+    <button x="415" y="20" height="40" disableUntilTicks="false" forever="false" kind="Observer" width="55" display="setup">setup</button>
   </widgets>
   <info>## WHAT IS IT?
 
